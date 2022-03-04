@@ -36,6 +36,15 @@ export default function DialogButtonRow(props: Props) {
 			marginLeft: 10,
 		};
 	}, [theme.buttonStyle]);
+	
+	useEffect(() => {
+ 		window.addEventListener('keydown', input_onKeyDown);
+
+ 		return () => {
+ 			window.removeEventListener('keydown', input_onKeyDown);
+ 		};
+ 	}, [input_onKeyDown]);
+
 
 	const okButton_click = () => {
 		if (props.onClick) props.onClick({ buttonName: 'ok' });
@@ -52,6 +61,16 @@ export default function DialogButtonRow(props: Props) {
 	const onKeyDown = (event: any) => {
 		if (event.keyCode === 13) {
 			okButton_click();
+		} else if (event.keyCode === 27) {
+			cancelButton_click();
+		}
+	};
+	
+	const input_onKeyDown = (event: any) => {
+		// the event fired always equals to 0
+		// therefore, used 'Enter' instead of event.keyCode === 13
+		if (event.keyCode === 'Enter') {
+			cancelButton_click();
 		} else if (event.keyCode === 27) {
 			cancelButton_click();
 		}
