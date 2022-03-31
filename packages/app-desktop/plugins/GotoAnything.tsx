@@ -556,7 +556,9 @@ class Dialog extends React.PureComponent<Props, State> {
 			event.preventDefault();
 
 			const item = this.selectedItem();
-			if (!item) return;
+			if (!item) { return; } else {
+				this.gotoItem((e = event)=> event.find((e1 = event) => e1.code === 'Enter'));
+			}
 
 			void this.gotoItem(item);
 		}
