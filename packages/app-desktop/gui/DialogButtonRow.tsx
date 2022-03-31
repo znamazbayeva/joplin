@@ -2,6 +2,7 @@ const React = require('react');
 import { useMemo } from 'react';
 const { _ } = require('@joplin/lib/locale');
 const { themeStyle } = require('@joplin/lib/theme');
+import Dialog from './Dialog';
 
 export interface ButtonSpec {
 	name: string;
@@ -26,7 +27,7 @@ interface Props {
 	okButtonDisabled?: boolean;
 	customButtons?: ButtonSpec[];
 }
-
+const attention = useContext(Dialog.prototype);
 export default function DialogButtonRow(props: Props) {
 	const theme = themeStyle(props.themeId);
 
